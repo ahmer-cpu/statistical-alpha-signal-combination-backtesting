@@ -1,21 +1,19 @@
 # Statistical Alpha Signal Combination & Robust Backtesting for US Equities
 
-A from-scratch Python research engine for **building, validating, and combining
-cross-sectional equity alpha signals** — with a statistically honest backtesting
-and validation layer designed to tell tradable signal apart from noise.
+A from-scratch Python research project for **building, validating, and combining
+cross-sectional equity alpha signals** — with a statistically robust backtesting
+and validation layer designed to isolate tradeable alpha from noise.
 
-The deliverable is not "a strategy that makes money." It is a **production-and-validation
-pipeline plus an evidenced verdict**: every factor is gated through Newey-West-corrected
+The deliverable is a **production-and-validation pipeline plus an evidenced verdict**: every factor is gated through Newey-West-corrected
 IC tests, block-bootstrap confidence intervals, IC-decay curves, and a turnover/cost-aware
-backtest before it is allowed into a combined signal — and negative results are reported
-as deliberately as positive ones.
+backtest before it is allowed into a combined signal.
 
 ---
 
 ## Headline result
 
 After triaging a 13-factor library on the S&P 100 (2021–2026), mapping factor redundancy
-with a K×K IC-correlation matrix, and running a three-combiner bake-off across horizons
+with a K×K IC-correlation matrix, and running a three-combiner comparison across horizons
 and market regimes, the research **freezes a single canonical combined alpha**:
 
 > **Signed IC-weighted (EWM, 126-day half-life) blend of sector-neutral momentum + low-volatility,
@@ -23,12 +21,12 @@ and market regimes, the research **freezes a single canonical combined alpha**:
 >
 > - **Market-neutral** — β ≈ −0.02 to SPY
 > - **Full-sample Sharpe ≈ 0.99** (cumulative PnL +73%, hit rate 56%)
-> - **Positive in *both* regimes** — Sharpe **+0.89** through the 2022 bear (a *positive* return
+> - **Positive in *both* market conditions** — Sharpe **+0.89** through the 2022 bear (a *positive* return
 >   while SPY fell ~18%) and **+1.03** through the bull
 
 The signal behaves as a **regime barbell**: momentum is the bull engine, low-vol the bear
 engine, and the two legs' anticorrelation makes the blend all-weather. Its one diagnosed
-structural weakness — surfaced, not hidden — is the **bear→bull transition**, where a
+structural weakness is the **bear→bull transition**, where a
 trailing-orientation lag carries the wrong sign into the new regime (the largest contributor
 to drawdown). Caveats (single observed bear regime, current-membership survivorship bias,
 defensive tilt) are stated explicitly in the notebook.
@@ -64,10 +62,8 @@ defensive tilt) are stated explicitly in the notebook.
 ## Why the validation layer is the point
 
 Naive IC significance tests on **overlapping** forward returns badly overstate confidence.
-Applying a Newey-West HAC correction to the IC t-statistics in this engine deflated apparent
-significance by **~3.5×** — enough to flip several "significant" single factors into nulls.
-Treating that correction, the bootstrap CIs, and the diagnostics battery as the *product*
-(rather than chasing a backtest line that goes up) is the central methodological stance here.
+Applying a Newey-West HAC correction to the IC t-statistics in this project deflated apparent
+significance by **~3.5×** — enough to change several "significant" single factors into null results.
 
 ---
 
