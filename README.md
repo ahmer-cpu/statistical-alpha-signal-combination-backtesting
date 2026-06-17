@@ -30,9 +30,7 @@ The largest contribution to drawdown occurs during **regime-change** and periods
 - Structural "lookahead" with statistical validation over the full sample prior to factor selection. This can be avoided by true train/test splits of the data - however, the factor selection remained unchanged.
 - A much larger study over number of assets and history is needed to fully ascertain the results (e.g. the period only observed a single extended bear market).
 
-Naive IC significance tests on **overlapping** forward returns badly overstate confidence.
-Applying a Newey-West HAC correction to the IC t-statistics in this project deflated apparent
-significance by **~3.5×** — enough to change several "significant" single factors into null results. Lasso coombiner (rolling Lasso regression on forward returns and using coefficients as factor weights) is delivered similar results
+Naive IC significance tests on **overlapping** forward returns badly overstate confidence. Applying a Newey-West HAC correction to the IC t-statistics in this project deflated apparent significance by **~3.5×** — enough to change several "significant" single factors into null results. Lasso combiner (rolling Lasso regression on forward returns and using coefficients as factor weights) is delivered similar results.
 
 ---
 
