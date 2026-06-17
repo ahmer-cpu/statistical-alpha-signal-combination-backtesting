@@ -1,10 +1,10 @@
 # Statistical Alpha Signal Combination & Robust Backtesting for US Equities
 
-A from-scratch Python research project for **building, validating, and combining
+A Python research project for **building, validating, and combining
 cross-sectional equity alpha signals** — with a statistically robust backtesting
-and validation layer designed to isolate tradeable alpha from noise.
+and validation layer designed to isolate alpha from noise.
 
-The deliverable is a **production-and-validation pipeline plus an evidenced verdict**: every factor is gated through Newey-West-corrected
+Every factor is gated through Newey-West-corrected
 IC tests, block-bootstrap confidence intervals, IC-decay curves, and a turnover/cost-aware
 backtest before it is allowed into a combined signal.
 
@@ -12,24 +12,27 @@ backtest before it is allowed into a combined signal.
 
 ## Headline result
 
-After triaging a 13-factor library on the S&P 100 (2021–2026), mapping factor redundancy
+After testing a 13-factor library on the S&P 100 (2021–2026), mapping factor redundancy
 with a K×K IC-correlation matrix, and running a three-combiner comparison across horizons
-and market regimes, the research **freezes a single canonical combined alpha**:
+and market regimes, the research **delivers a single combined alpha signal**:
 
 > **Signed IC-weighted (EWM, 126-day half-life) blend of sector-neutral momentum + low-volatility,
 > rebalanced every 31 days.**
 >
-> - **Market-neutral** — β ≈ −0.02 to SPY
-> - **Full-sample Sharpe ≈ 0.99** (cumulative PnL +73%, hit rate 56%)
+> - **Annualized alpha** — 13.53% 
+> - **Market-neutral** — β ≈ −0.02 to SPY with
+> - **Full-sample Sharpe ≈ 0.99** (cumulative PnL +73%, hit rate 56%) with **10 bps** rebelancing cost
 > - **Positive in *both* market conditions** — Sharpe **+0.89** through the 2022 bear (a *positive* return
 >   while SPY fell ~18%) and **+1.03** through the bull
 
-The signal behaves as a **regime barbell**: momentum is the bull engine, low-vol the bear
-engine, and the two legs' anticorrelation makes the blend all-weather. Its one diagnosed
-structural weakness is the **bear→bull transition**, where a
-trailing-orientation lag carries the wrong sign into the new regime (the largest contributor
-to drawdown). Caveats (single observed bear regime, current-membership survivorship bias,
-defensive tilt) are stated explicitly in the notebook.
+The largest contribution to drawdown occurs during **regime-change** and periods of high volatility - the results do not claim to find tradeable alpha and the caveats are as follows:
+- Membership/selection bias: the study used current S&P 500 members' history over the sample period, not a point-in-time membership. This biases the results upwards.
+- Structural "lookahead" with statistical validation over the full sample prior to factor selection. This can be avoided by true train/test splits of the data - however, the factor selection remained unchanged.
+- A much larger study over number of assets and history is needed to fully ascertain the results (e.g. the period only observed a single extended bear market).
+
+Naive IC significance tests on **overlapping** forward returns badly overstate confidence.
+Applying a Newey-West HAC correction to the IC t-statistics in this project deflated apparent
+significance by **~3.5×** — enough to change several "significant" single factors into null results. Lasso coombiner (rolling Lasso regression on forward returns and using coefficients as factor weights) is delivered similar results
 
 ---
 
@@ -61,9 +64,6 @@ defensive tilt) are stated explicitly in the notebook.
 
 ## Why the validation layer is the point
 
-Naive IC significance tests on **overlapping** forward returns badly overstate confidence.
-Applying a Newey-West HAC correction to the IC t-statistics in this project deflated apparent
-significance by **~3.5×** — enough to change several "significant" single factors into null results.
 
 ---
 
