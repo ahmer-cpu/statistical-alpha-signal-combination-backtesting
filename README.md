@@ -19,9 +19,9 @@ and market regimes, the research **delivers a single combined alpha signal**:
 > **Signed IC-weighted (EWM, 126-day half-life) blend of sector-neutral momentum + low-volatility,
 > rebalanced every 31 days.**
 >
-> - **Annualized alpha** — 13.53% 
-> - **Market-neutral** — β ≈ −0.02 to SPY with
-> - **Full-sample Sharpe ≈ 0.99** (cumulative PnL +73%, hit rate 56%) with **10 bps** rebelancing cost
+> - **Annualized alpha** — 13.53%
+> - **Market-neutral** — β ≈ −0.02 to SPY
+> - **Full-sample Sharpe ≈ 0.99** (cumulative PnL +73%, hit rate 56%) with **10 bps** rebalancing cost
 > - **Positive in *both* market conditions** — Sharpe **+0.89** through the 2022 bear (a *positive* return
 >   while SPY fell ~18%) and **+1.03** through the bull
 
@@ -30,7 +30,7 @@ The largest contribution to drawdown occurs during **regime-change** and periods
 - Structural "lookahead" with statistical validation over the full sample prior to factor selection. This can be avoided by true train/test splits of the data - however, the factor selection remained unchanged.
 - A much larger study over number of assets and history is needed to fully ascertain the results (e.g. the period only observed a single extended bear market).
 
-Naive IC significance tests on **overlapping** forward returns badly overstate confidence. Applying a Newey-West HAC correction to the IC t-statistics in this project deflated apparent significance by **~3.5×** — enough to change several "significant" single factors into null results. Lasso combiner (rolling Lasso regression on forward returns and using coefficients as factor weights) is delivered similar results.
+Naive IC significance tests on **overlapping** forward returns badly overstate confidence. Applying a Newey-West HAC correction to the IC t-statistics in this project deflated apparent significance by **~3.5×** — enough to change several "significant" single factors into null results. The Lasso combiner (rolling Lasso regression on forward returns, using the coefficients as factor weights) delivered similar results.
 
 ---
 
@@ -59,9 +59,6 @@ Naive IC significance tests on **overlapping** forward returns badly overstate c
   metadata-embedded), an S&P 500 / S&P 100 constituent + GICS-sector scraper, and a budget-aware
   Alpha Vantage fundamentals collector
 - **242 unit tests** covering metrics, factors, combiners, the backtester, IC analysis, and diagnostics
-
-## Why the validation layer is the point
-
 
 ---
 
