@@ -1,0 +1,38 @@
+# Virtual environment
+.venv/
+venv/
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+dist/
+build/
+*.egg
+
+# Environment variables (API keys — never commit)
+.env
+
+# Data files (too large for git) — but keep the small tracked universe files
+data/*
+!data/sp100_constituents.csv
+!data/sp500_constituents.csv
+
+# Jupyter
+.ipynb_checkpoints/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Tool caches
+.mypy_cache/
+.ruff_cache/
+.pytest_cache/
